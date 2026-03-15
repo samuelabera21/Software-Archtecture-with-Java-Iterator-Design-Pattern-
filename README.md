@@ -1,114 +1,80 @@
-# Iterator Design Pattern Demo (Java Swing)
+# Iterator Pattern Java Demos
 
-**Project Name:** Iterator Design Pattern  
-**Presenter:** Samuel Abera Mekonn
+This workspace contains two Java demonstrations of the Iterator Design Pattern:
 
-This project demonstrates the **Iterator Design Pattern** using a simple Java Swing UI.
-You enter course names, then the app shows traversal output in:
-- **Forward order** using Java built-in iterator
-- **Reverse order** using a custom iterator
+- A Swing-based university course iterator demo.
+- A console-based GoF-style iterator demo in the `java/` folder.
 
----
+## Project Structure
 
-## 1) Project Files
+- `UniversityIteratorDemo.java`: Swing application with forward and reverse traversal.
+- `java/Container.java`: Aggregate interface.
+- `java/Iterator.java`: Iterator interface.
+- `java/NameRepository.java`: Concrete collection with inner concrete iterator.
+- `java/IteratorPatternDemo.java`: Console client for the custom iterator interfaces.
 
-- `UniversityIteratorDemo.java` – main app (UI + demo logic)
-- `CourseCollection.class` – compiled aggregate class
-- `ReverseCourseIterator.class` – compiled custom iterator
-- `UniversityIteratorDemo.class` – compiled main class
+## Requirements
 
----
+- JDK 8+ installed.
+- `javac` and `java` available in your terminal PATH.
 
-## 2) Requirements
+## Run Demo 1: Swing University Iterator
 
-- Java JDK installed (you already have Eclipse Adoptium JDK)
-- Terminal opened in project folder:
-  - `C:/Users/hp/Desktop/javaarchtecture`
-
----
-
-## 3) How to Run
-
-Run these commands in terminal:
+From the project root:
 
 ```bash
 javac UniversityIteratorDemo.java
 java UniversityIteratorDemo
 ```
 
-Or one line:
+What it does:
+
+- Prompts for the number of courses.
+- Collects course names.
+- Displays traversal output using:
+	- Forward iterator (`courses.iterator()`).
+	- Reverse custom iterator (`ReverseCourseIterator`).
+
+## Run Demo 2: Console GoF Iterator Example
+
+From the project root:
 
 ```bash
-javac UniversityIteratorDemo.java && java UniversityIteratorDemo
+cd java
+javac *.java
+java IteratorPatternDemo
 ```
 
----
+What it does:
 
-## 4) What the UI Shows
+- Creates a `NameRepository` collection.
+- Gets an iterator via `getIterator()`.
+- Loops with `hasNext()` and `next()` to print each name.
 
-### Input Dialogs
-Large, clear dialogs display:
-- Project title: **Iterator Design Pattern**
-- Presenter name: **Samuel Abera Mekonn**
-- Course input prompt
+## Iterator Pattern Mapping
 
-### Output Window
-A large window shows:
-- Project name
-- Presenter name
-- Forward traversal steps (`hasNext()`, `next()`)
-- Reverse traversal steps (`hasNext()`, `next()`)
+Swing demo (`UniversityIteratorDemo.java`):
 
----
+- Aggregate: `CourseCollection`
+- Iterator type: Java built-in `Iterator<String>`
+- Concrete iterators:
+	- Forward list iterator
+	- Reverse custom iterator `ReverseCourseIterator`
+- Client: `UniversityIteratorDemo`
 
-## 5) Iterator Pattern Mapping (for presentation)
+Console demo (`java/`):
 
-- **Aggregate:** `CourseCollection`
-  - Stores internal list of courses
-  - Provides iterator creation methods
-- **Iterator Interface:** Java `Iterator<String>`
-- **Concrete Iterators:**
-  - Forward: built-in list iterator (`courses.iterator()`)
-  - Reverse: custom `ReverseCourseIterator`
-- **Client:** `UniversityIteratorDemo`
-  - Uses iterators without exposing list internals
+- Aggregate interface: `Container`
+- Iterator interface: `Iterator`
+- Concrete aggregate: `NameRepository`
+- Concrete iterator: `NameRepository.NameIterator`
+- Client: `IteratorPatternDemo`
 
----
+## Troubleshooting
 
-## 6) Short Presentation Script (1–2 minutes)
-
-1. “This project demonstrates the Iterator Design Pattern in Java.”
-2. “`CourseCollection` is the aggregate that stores courses.”
-3. “For forward traversal, I use Java’s built-in iterator.”
-4. “For reverse traversal, I implemented `ReverseCourseIterator`.”
-5. “The client code does not access list internals directly; it only uses iterator methods (`hasNext`, `next`).”
-6. “The Swing UI makes input and traversal output clean and easy to present.”
-
----
-
-## 7) Sample Demo Data
-
-- Software Architecture
-- Artificial Intelligence
-- Machine Learning
-
----
-
-## 8) Troubleshooting
-
-### Error: command not found (`javac` or `java`)
-- Ensure JDK is installed and added to PATH.
-
-### Old output appears
-- Recompile before run:
-  - `javac UniversityIteratorDemo.java`
-
-### UI not opening
-- Check if another Java process is still running and close it, then run again.
-
----
-
-## 9) Exit
-
-- Click **Cancel** in input dialog to stop.
-- Close the output window to finish the app.
+- `javac` or `java` not found:
+	- Verify JDK installation and PATH configuration.
+- Class not found when running console demo:
+	- Run `java IteratorPatternDemo` from inside the `java` folder.
+- UI does not appear:
+	- Ensure you are running `UniversityIteratorDemo` on a desktop session with GUI support.
